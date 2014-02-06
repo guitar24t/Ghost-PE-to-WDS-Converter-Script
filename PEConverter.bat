@@ -10,21 +10,6 @@ mkdir ghostPEMount
 mkdir temp
 goto copype
 
-:CONT
-imagex /mountrw newPE\winpe.wim 1 newPE\mount
-imagex /mount %imgName% 2 ghostPEMount
-move /y newPE\mount\* temp
-move /y ghostPEMount\* newPE\mount
-imagex /unmount /commit newPE\mount
-imagex /unmount ghostPEMount
-
-goto :EOF
-
-
-
-
-
-
 
 :copype
 setlocal
@@ -100,6 +85,18 @@ goto :EOF
 :FAIL
 echo Failed to create working directory
 goto :EOF
+
+
+REM :CONT
+REM imagex /mountrw newPE\winpe.wim 1 newPE\mount
+REM imagex /mount %imgName% 2 ghostPEMount
+REM move /y newPE\mount\* temp
+REM move /y ghostPEMount\* newPE\mount
+REM imagex /unmount /commit newPE\mount
+REM imagex /unmount ghostPEMount
+REM goto :EOF
+
+
 
 :CONT
 imagex /mountrw newPE\winpe.wim 1 newPE\mount
