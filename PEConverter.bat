@@ -7,8 +7,10 @@ if /i %PROCESSOR_ARCHITECTURE% EQU X86 set PATH=C:\Program Files\Windows AIK\Too
 if /i %PROCESSOR_ARCHITECTURE% NEQ X86 set PATH=C:\Program Files\Windows AIK\Tools\PETools\;C:\Program Files\Windows AIK\Tools\PETools\..\%PROCESSOR_ARCHITECTURE%;C:\Program Files\Windows AIK\Tools\PETools\..\x86;C:\Program Files\Windows AIK\Tools\PETools\..\%PROCESSOR_ARCHITECTURE%\Servicing;C:\Program Files\Windows AIK\Tools\PETools\..\x86\Servicing;%PATH%;
 cd /d %~dp0
 mkdir ghostPEMount
-mkdir temp
+REM mkdir temp
 goto copype
+
+
 
 
 :copype
@@ -86,26 +88,15 @@ goto :EOF
 echo Failed to create working directory
 goto :EOF
 
-
-REM :CONT
-REM imagex /mountrw newPE\winpe.wim 1 newPE\mount
-REM imagex /mount %imgName% 2 ghostPEMount
-REM move /y newPE\mount\* temp
-REM move /y ghostPEMount\* newPE\mount
-REM imagex /unmount /commit newPE\mount
-REM imagex /unmount ghostPEMount
-REM goto :EOF
-
-
-
 :CONT
 imagex /mountrw newPE\winpe.wim 1 newPE\mount
 imagex /mount %imgName% 2 ghostPEMount
 xcopy /Y /E /H ghostPEMount\* newPE\mount
 imagex /unmount /commit newPE\mount
 imagex /unmount ghostPEMount
-move /Y newPE\winpe.wim %imgName:~0,-4%_Converted.wim
-rmdir /S /Q ghostPEMount
-rmdir /S /Q temp
-rmdir /S /Q newPE
+move /y newpe\winpe.wim %imgname:~0,-4%_converted.wim
+rmdir /s /q ghostpemount
+rmdir /s /q temp
+rmdir /s /q newpe
 goto :EOF
+
