@@ -1,5 +1,8 @@
 REM Copyright (c) Robert Hilton 2012
 REM robert.a.hilton.jr@gmail.com
+REM Usage: PEConverter.bat
+REM Enter the ghost image name: ghost.wim
+
 @echo off
 set imgName= 
 set /p imgName=Enter the ghost image name: 
